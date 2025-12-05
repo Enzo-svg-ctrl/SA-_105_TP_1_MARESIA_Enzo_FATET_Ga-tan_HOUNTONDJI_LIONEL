@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TP_1_Partie_1 : Le_code_python.</title>
+  <style>
+    :root{--bg:#0b1220;--card:#0f1724;--accent:#6ee7b7;--muted:#9aa7b3}
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:linear-gradient(180deg,#071021 0%, #081525 100%); color:#e6eef6}
+    .wrap{max-width:900px;margin:48px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    h1{margin:0 0 8px;font-size:20px;color:var(--accent)}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+    .card{background:var(--card);padding:18px;border-radius:10px}
+    pre{margin:0;overflow:auto;border-radius:8px;background:#071126;padding:16px}
+    code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Helvetica Neue", monospace;font-size:14px;line-height:1.5;color:#dbeafe;display:block}
+    .toolbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:10px}
+    button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 10px;border-radius:8px;cursor:pointer}
+    button:hover{border-color:rgba(255,255,255,0.12);color:var(--accent)}
+    .meta{font-size:13px;color:var(--muted);margin-top:10px}
+    .notice{margin-top:12px;padding:10px;border-radius:8px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Le script Python</h1>
+    <p class="lead">Selon certaine rumeur la population dans yonne décroirait au cours du temps. Nous allons donc le vérifier. Dans ce TP, nous chercherons à confirmer ou infirmer l’idée selon laquelle la population d’Auxerre et/ou du département de l’Yonne serait en diminution. Pour cela, nous analyserons les données de l'agglomération immédiate d'Auxerre des recensements de 2008, 2016, 2021.</p>
+
+    <section class="card">
+      <div class="toolbar">
+        <button id="copyBtn" title="Copier le code">Copier</button>
+        <button id="downloadBtn" title="Télécharger le fichier .py">Télécharger (.py)</button>
+      </div>
+
+      <pre><code id="codeBlock"># question libre : La population dans yonne augmente ou diminue au cours du temps !
+
+        # -*- coding: utf-8 -*-
+        """
+        Created on Fri Dec  5 13:48:52 2025
+
+        @author: phili
+        """
+
+        import csv
+        import matplotlib.pyplot as plt
+        import numpy as np
+        communes = []
+        with open("donnees_2008.csv", newline= '') as csvfile :
+            reader=csv.reader(csvfile,delimiter=',')
+            for row in reader:
+                communes.append(row)
+
+        #print(communes)
+        del(communes[0])
+
+
+        Yonne = []
+        print(Yonne)
+
+        for i in range(len(communes)):
+            if communes[i][6]=='Appoigny':
+                Yonne.append(communes[i][9]);
+
+            if(communes[i][6]=='Auxerre'):
+                Yonne.append(communes[i][9])
+
+            if(communes[i][6]=='Monéteau'):
+                Yonne.append(communes[i][9])
+
+            if(communes[i][6]=='Perrigny'):
+                if(communes[i][9]=='1203'):
+                    Yonne.append(communes[i][9])
+
+
+            if(communes[i][6]=='Saint-Georges-sur-Baulche'):
+                Yonne.append(communes[i][9])
+
+        print(Yonne)
+        moy2008 = 0
+
+
+        for j in range(len(Yonne)):
+            moy2008 = moy2008+int(Yonne[j])
+        moy2008 = moy2008/len(Yonne)
+        print(moy2008)
+
+
+        commune2 = []
+        with open("donnees_2016.csv", newline= '') as csvfile :
+            reader=csv.reader(csvfile,delimiter=',')
+            for row in reader:
+                commune2.append(row)
+
+        #print(commune2)
+        del(commune2[0])
+
+
+        Yonne2 = []
+        codcom = []
+
+        for k in range(len(commune2)):
+            if commune2[k][6]=='Appoigny':
+                Yonne2.append(commune2[k][9]);
+                codcom.append(commune2[k][5])
+            if(commune2[k][6]=='Auxerre'):
+                Yonne2.append(commune2[k][9]);
+                codcom.append(commune2[k][5])
+            if(commune2[k][6]=='Monéteau'):
+                Yonne2.append(commune2[k][9]);
+                codcom.append(commune2[k][5])
+            if(commune2[k][6]=='Perrigny'):
+                if(commune2[k][9]=='1310'):
+                    Yonne2.append(commune2[k][9])
+                    codcom.append(commune2[k][5])
+            if(commune2[k][6]=='Saint-Georges-sur-Baulche'):
+                Yonne2.append(commune2[k][9]);
+                codcom.append(commune2[k][5])
+        print(Yonne2)
+        print(codcom)
+        moy2016 = 0
+
+
+        for j in range(len(Yonne2)):
+            moy2016 = moy2016+int(Yonne2[j])
+        moy2016 = moy2016/len(Yonne2)
+        print(moy2016)
+
+
+        commune3 = []
+        with open("donnees_2021.csv", newline= '') as csvfile :
+            reader=csv.reader(csvfile,delimiter=';')
+            for row in reader:
+                commune3.append(row)
+
+        #print(commune3)
+        del(commune3[0])
+
+        g=0
+
+        Yonne3 = []
+
+        for k in range(len(commune3)):
+            if commune3[k][2]=='89013':
+                Yonne3.append(commune3[k][5])
+            if(commune3[k][2]=='89024'):
+                Yonne3.append(commune3[k][5])
+            if(commune3[k][2]=='89263'):
+                Yonne3.append(commune3[k][5])
+            if(commune3[k][2]=='89295'):
+                Yonne3.append(commune3[k][5])
+            if(commune3[k][2]=='89346'):
+                Yonne3.append(commune3[k][5])
+
+        print(Yonne3)
+        moy2021 = 0
+
+
+        for j in range(len(Yonne3)):
+            moy2021 = moy2021+int(Yonne3[j])
+        moy2021 = moy2021/len(Yonne3)
+        print(moy2021)
+
+
+
+
+
+        commune4 = []
+        with open("donnees_2023.csv", newline= '') as csvfile :
+            reader=csv.reader(csvfile,delimiter=';')
+            for row in reader:
+                commune4.append(row)
+
+        #print(communes)
+        del(commune4[0])
+
+
+        Yonne4 = []
+
+        for i in range(len(commune4)):
+            if commune4[i][7]=='Appoigny':
+                Yonne4.append(commune4[i][10]);
+
+            if(commune4[i][7]=='Auxerre'):
+                Yonne4.append(commune4[i][10])
+
+            if(commune4[i][7]=='Monéteau'):
+                Yonne4.append(commune4[i][10])
+
+            if(commune4[i][7]=='Perrigny'):
+                if(commune4[i][10]=='1292'):
+                    Yonne4.append(commune4[i][10])
+
+
+            if(commune4[i][7]=='Saint-Georges-sur-Baulche'):
+                Yonne4.append(commune4[i][10])
+
+        print(Yonne4)
+        moy2023 = 0
+
+
+        for j in range(len(Yonne4)):
+            moy2023 = moy2023+int(Yonne4[j])
+        moy2023 = moy2023/len(Yonne4)
+        print(moy2023)
+
+        moyennes = [moy2008,moy2016,moy2021,moy2023]
+
+        x = ["2008","2016","2021","2023"]
+
+        y = np.array(moyennes)
+        plt.plot(x,y,marker='o')
+        plt.xlabel("Année")
+        plt.ylabel('Population')
+        plt.title("Population de l'aglomération immédiate")
+        plt.show()
+
+</code></pre>
+
+      <div class="meta">Langage : <strong>Python 3</strong> — Fichier : <strong>exemple_factoriel.py</strong></div>
+      <div class="meta"><strong>L’étude porte sur plusieurs périmètres : la ville d’Auxerre et son agglomération immédiate. L’intégralité du traitement est réalisée en Python. Le rapport présente la problématique, la démarche suivie, les graphiques obtenus et une conclusion. L’ensemble des fichiers du projet est géré via GitHub comme demandé dans le cahier des charges.</strong></div>
+      <div class="notice">Astuce : pour exécuter ce script sur ta machine, sauvegarde-le en <code>exemple_factoriel.py</code> puis lance <code>python exemple_factoriel.py</code> dans un terminal (ou <code>python3</code> selon ta configuration).</div>
+    </section>
+
+    <p style="margin-top:18px;color:var(--muted);font-size:13px">MARESIA Enzo FATET Gaetan HOUNTONDJI Lionel.</p>
+  </main>
+
+  <script>
+    const code = document.getElementById('codeBlock').innerText;
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code);
+        alert('Code copié dans le presse-papiers');
+      } catch (e) {
+        alert('Impossible de copier : ' + e.message);
+      }
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const blob = new Blob([code], {type: 'text/x-python'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'code_évolution_pop.py';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
